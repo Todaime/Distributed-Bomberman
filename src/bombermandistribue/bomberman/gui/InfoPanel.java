@@ -1,0 +1,49 @@
+package bombermandistribue.bomberman.gui;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import bombermandistribue.bomberman.Game;
+
+public class InfoPanel extends JPanel {
+	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel timeLabel;
+	private JLabel livesLabel;
+
+	public InfoPanel(Game game) {
+		setLayout(new GridLayout());
+		
+		timeLabel = new JLabel("Time: " + game.getBoard().getTime());
+		timeLabel.setForeground(Color.white);
+		timeLabel.setHorizontalAlignment(JLabel.CENTER);
+		
+		livesLabel = new JLabel("Lives: " + game.getBoard().getLives());
+		livesLabel.setForeground(Color.white);
+		livesLabel.setHorizontalAlignment(JLabel.CENTER);
+		
+		add(timeLabel);
+		// add(livesLabel);
+		
+		
+		setBackground(Color.black);
+		setPreferredSize(new Dimension(0, 40));
+	}
+	
+	public void setTime(int t) {
+		timeLabel.setText("Time: " + t);
+	}
+
+	public void setLives(int t) {
+		livesLabel.setText("Lives: " + t);
+		
+	}
+	
+}

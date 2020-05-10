@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="BombermanDistribué" default="compile" basedir=".">
+    <path id="projet.classpath">
+        <fileset dir="classes">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement location="classes"/>
+    </path>
+
+    <target name="compile">
+        <javac srcdir="src/"
+                destdir="classes/">
+                <classpath refid="projet.classpath"/>
+        </javac>
+    </target>
+
+    <target name="clean">
+	<delete includeEmptyDirs="true">
+            <fileset dir="classes" includes="**/*.class"/>
+	</delete>
+    </target>
+
+    <target name="runServer">
+        <java classpath="classes" classname="server.Server" fork="true">
+            <classpath refid="projet.classpath"/>
+        </java>
+    </target>
+
+    <target name="runClient">
+        <java classpath="classes" classname="client.ClientUI" fork="true">
+            <classpath refid="projet.classpath"/>
+        </java>
+    </target>
+
+</project>
+

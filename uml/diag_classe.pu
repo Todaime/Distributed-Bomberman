@@ -1,0 +1,294 @@
+@startuml
+
+package bombermandistribue {
+    package bomberman {
+        class Board {
+            +void update()
+            +void render(Screen)
+            +void newGame()
+            -void resetProperties()
+            +void restartLevel()
+            +void nextLevel()
+            +void changeLevel(int)
+            +void changeLevelByCode(String)
+            +boolean isPowerupUsed(int, int , int)
+            *void detectEndGame()
+            +void endGame()
+            +boolean detectNoEnemies()
+            +void gamePause()
+            +void gameResume()
+            +void drawScreen(Graphics)
+            +Entity getEntity(int, int , Mob)
+            +List<Bomb> getBombs()
+            +Bomb getBombAt(int , int)
+            +Mob getMobAt(int, int)
+            +Player getPlayer()
+            +Mob getMobExcluding(int, int, Mob)
+            +Explosion getExplosionAt(int, int)
+            +Entity getEntityAt(int, int)
+            +void addEntitie(int, Entity)
+            +void addMob(Mob)
+            +void addBomb(Bomb)
+            +void addMessage(Message)
+            *void renderEntities(Screen)
+            *void renderMobs(Screen)
+            *renderBombs(Screen)
+            +void RenderMessages(Graphics)
+            *void updateEntities()
+            *void updateMobs()
+            *void updateBombs()
+            *void updateMessages()
+            +Keybaord getInput()
+            +Level getLevel()
+            +Game getGame()
+            +int getShow()
+            +void setShow(int)
+            +int getTime()
+            +int getLives()
+            +int substractTime()
+            +void addLives(int)
+            +int getWidth()
+            +int getHeight()
+        }
+        class Bomberman {
+            +void main(String[])
+        }
+        class Game {
+            -void renderGame()
+            -void renderScreen()
+            -void update()
+            +void start()
+            +int getPlayerSpeed()
+            +int getBombRate()
+            +int getBombRadius()
+            +void addPlayerSpeed(int)
+            +void addBombRadius(int)
+            +void addBombRate(int)
+            +int getScreenDelay()
+            +void decreaseScreenDelay()
+            +void resetScreenDelay()
+            +Keyboard getInput()
+            +Board getBoard()
+            +void run()
+            +void stop()
+            +boolean isRunning()
+            +boolean isPaused()
+            +void pause()
+        }
+        package entities {
+            class AnimatedEntitiy {
+                *void animate()
+            }
+            class Entity {
+                +void remove()
+                +boolean isRemoved()
+                +Sprite getSprite()
+                +boolean collide(Entity)
+                +int getXPixel()
+                +int getYPixel()
+                +int getXCase()
+                +int getYCase()
+            }
+            class LayeredEntity {
+                +Entity getTopEntity()
+                -void clearRemove()
+                +void addBeforeTop(Entity)
+            }
+            class Message {
+                +int getDuration()
+                +void setDuration()
+                +String getMessage()
+                +Color getColor()
+                +int getSize()
+            }
+            package bomb {
+                class Bomb
+                class DirectionalExplosion
+                class Explosion
+            }
+            package mob {
+                class Mob
+                class Player
+                package enemy.ai {
+                    class AI
+                    class AILow
+                    class AIMedium
+                }
+            }
+
+            package tile {
+                class GrassTile
+                class PortalTile
+                class Tile
+                class WallTile
+                package destroyable {
+                    class BrickTile
+                    class DestroyableTile
+                }
+
+                package powerup {
+                    class PowerupBomb
+                    class PowerupFlames
+                    class Powerup
+                    class PowerupSpeed
+                }
+            }
+        }
+
+        package exceptions {
+            class BombermanException
+            class LoadLevelException
+        }
+
+        package graphics {
+            class IRender {
+                +void update()
+                +void render(Screen)
+            }
+            class Screen {
+                +void clear()
+                +void renderEntity(int, int, Entity)
+                +void renderEntityWithBelowSprite(int, int, Entity, Sprite)
+                +void drawEndGame(Graphics, String)
+                +void drawPause(Graphics)
+                +void drawCenteredString(String, int, int, Graphics)
+                +int getWidth()
+                +int getHeight()
+                +int getRealWidth()
+                +int getRealHeight()
+                +void drawChangeLevel(Graphics, int)
+            }
+            class Sprite
+            class SpriteSheet {
+                +int SIZE
+                +int[] _pixels
+                -void load()
+            }
+        }
+
+        package gui {
+            class CodeDialog
+            class Frame {
+                +void newGame()
+                +void ChangeLevel(int)
+                +void pauseGame()
+                +void resumeGame()
+                +boolean isRunning()
+                +void setTime(int)
+                +void setLives(int)
+                +boolean validCode(String)
+                +void changeLevelByCode(String)
+            }
+            class GamePanel {
+                +void changeSize()
+                +Game getGame()
+            }
+            class InfoDialog
+            class InfoPanel {
+                +void setTime(int)
+                +void setLives(int)
+            }
+            package menu {
+                class "Game" as GameMenu
+                class Help
+                class Menu
+                class Options
+            }
+        }
+
+        package input {
+            class Keyboard {
+                +void update()
+            }
+        }
+
+        package level {
+            class Coordinates {
+                +int pixelToCase(int)
+                +int pixelToCase(double)
+                +int caseToPixel(int)
+            }
+            class FileLevel {
+                +void addLevelEntity(char, int, int)
+            }
+            class ILevel
+            class Level {
+                +void loadLevel(String)
+                +void createEntities()
+                +int validCode(String)
+                +String getActualCode()
+                +int getWidth()
+                +int getHeight()
+                +int getLevel()
+            }
+        }
+    }
+
+    package client {
+        class Client
+        class Ihm
+    }
+
+    package connexion {
+        class ConnexionClient
+        class Connexion
+        class ConnexionServeur
+    }
+
+    package serveur {
+        class Serveur
+    }
+
+    Bomberman -> Frame
+
+    Frame --> GamePanel
+    Frame -> InfoPanel
+
+    Game -> Keyboard
+    Game --> Screen
+    Game <--> Frame
+    Game --> BombermanException
+
+    GamePanel --> Game
+    GamePanel --> BombermanException
+
+    Board -|> IRender
+    Board <--> Level
+    Board -> Game
+    Board -> Keyboard
+    Board --> Screen
+    Board --o Entity
+    Board --o Mob
+    Board --o Bomb
+    Board -o Message
+
+    FileLevel -|> Level
+
+    Level -|> ILevel
+
+    InfoDialog --> Frame
+
+    CodeDialog --> Frame
+
+    GameMenu --> Frame
+
+    Options --> Frame
+
+    Sprite -> SpriteSheet
+
+    IRender --> Screen
+
+    LoadLevelException -|> BombermanException
+
+    LayeredEntity --|> Entity
+    LayeredEntity --* Entity
+
+    AnimatedEntitiy -|> Entity
+
+    Message --|> Entity
+
+    Entity --|> IRender
+    Entity --> Sprite
+
+}
+@enduml

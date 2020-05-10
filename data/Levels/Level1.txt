@@ -1,0 +1,31 @@
+1 13 17
+#################
+#p b************#
+# #*# #*#*# #*#*#
+#f**   ***   ***#
+#*#*# #*# # #*# #
+#*******   *****#
+# #*# #*# #*# #*#
+# **   *****   *#
+# #*# #*#*#*# #*#
+#***************#
+#*# #*#*# #*#*# #
+#*   ***   *** r#
+#################
+
+Meta data:
+(Number or Level) (Rows) (Columns)
+
+Info Tiles:
+# - Wall
+* - Brick
+x - Portal
+
+Mobs:
+p - Player1
+R - Player2
+
+Powerups:
+b - Powerup Bombs
+f - Powerup Flames
+s - Powerup Speed
