@@ -15,8 +15,7 @@ We chose to use Java RMI.
 - uml/ contains conception explanation.
 
 ## Screen of the game
-<img src="Home.png" Height=325>
-<img src="Game.png" Height=325>
+<img src="Home.png" Height=325> <img src="Game.png" Height=325>
 
 ## UserGuide
  - Computer 1 (If on 2 computers)
