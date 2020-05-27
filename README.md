@@ -34,7 +34,7 @@ We chose to use Java RMI.
  
  - You can remove all compiled files using `ant clean`
 
-## How the play the game
+## How to play the game
  - You can move your character using the arrows of your keyboard
  - The goal is to kill you oponent using a bomb you can place
  - You can place a bomb by pressing the space bar
